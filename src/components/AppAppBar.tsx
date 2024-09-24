@@ -20,8 +20,9 @@ import Drawer from "@/components/drawer"
 import { useCopywriting } from "@/lib"
 
 const ResponsiveMenu: React.FC = () => {
-  const { get_script } = useCopywriting()
+  const { get_script, getInternationalScript } = useCopywriting()
   const script = get_script()
+  const enScript = getInternationalScript()
   return (
     <React.Fragment>
       {/* md */}
@@ -42,7 +43,7 @@ const ResponsiveMenu: React.FC = () => {
               <Button
                 size="small"
                 variant="text"
-                href={`#${item}`}
+                href={`/${enScript.menus.produto[index]}`}
                 key={`appbar-${index}-button`}
               >
                 {item}

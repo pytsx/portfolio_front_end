@@ -2,6 +2,7 @@
 import React from "react"
 
 import ptBr from "./ptBr.json"
+import en from "./en.json"
 
 type Lang = "ptBr" | "en" | "it"
 
@@ -19,23 +20,31 @@ interface IContext {
   lang: Lang
   toggleLang: (lang: Lang) => void
   get_script: () => Script
+  getInternationalScript: () => Script
 }
 
 const Context = React.createContext<IContext>({
   lang: "ptBr",
   toggleLang: () => { },
-  get_script: () => ptBr
+  get_script: () => ptBr,
+  getInternationalScript: () => en
 })
 
 const defaultLang: Lang = "ptBr"
+const internationalScript: Lang = "en"
 
 export const CopywritingProvider = ({ children }: React.PropsWithChildren) => {
   const [lang, setLang] = React.useState<Lang>(defaultLang)
   const [scripts] = React.useState<Record<Lang, Script>>({
     "ptBr": ptBr,
-    "en": ptBr,
+    "en": en,
     "it": ptBr
   })
+
+
+  const getInternationalScript = () => {
+    return scripts[internationalScript]
+  }
 
   const toggleLang = (newLang: Lang) => {
     setLang(newLang)
@@ -54,7 +63,8 @@ export const CopywritingProvider = ({ children }: React.PropsWithChildren) => {
     <Context.Provider value={{
       lang,
       toggleLang,
-      get_script
+      get_script,
+      getInternationalScript
     }}>
       {children}
     </Context.Provider>

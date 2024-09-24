@@ -15,7 +15,7 @@ const ColorModeSwitcher = () => {
 
   if (!mounted) {
     // fot ssr
-    return null
+    return <IconButton><Sun className="w-5 h-5" /></IconButton>
   }
   return (
     <IconButton onClick={toggleMode}>
